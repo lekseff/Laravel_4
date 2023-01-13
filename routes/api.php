@@ -18,4 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::apiResource('cars', \App\Http\Controllers\CarController::class);
+});
+
 Route::post('/tokens/create', [\App\Http\Controllers\ApiTokenController::class, 'index']);
